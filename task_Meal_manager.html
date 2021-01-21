@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meal Manager</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  
+  
+</head>
+<body>
+ 
+
+
+  <div class="container" style="border: solid; width: 500px;margin: auto;">
+    
+    
+
+  </div>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+
+    var i=0,j,
+      meal='----',
+      number=1,
+      restaurant="----",
+      dish=["----"],
+      quantity=[1];
+
+    var step1=$(`<div class="row">
+      <br><br>
+      <table align="center">
+      <tr id="row">
+      </tr></table>
+      <br></div>
+      <div class="row">
+         <form id="form1" style="width: 248px;margin: auto;"> </form>
+      <br><br>
+      </div>`);
+  var rowpage1=$(`<td>|</td>
+        <td bgcolor="blue" >step1</td>
+        <td>|</td>
+        <td bgcolor="red">step2</td>
+        <td>|</td>
+        <td bgcolor="red">step3</td>
+        <td>|</td>
+        <td bgcolor="red">Review</td><td>|</td>`);
+  var rowpage2=$(`<td>|</td>
+      <td bgcolor="green" >step1</td>
+      <td>|</td>
+      <td bgcolor="blue">step2</td>
+      <td>|</td>
+      <td bgcolor="red">step3</td>
+      <td>|</td>
+      <td bgcolor="red">Review</td><td>|</td>`);
+  var rowpage3=$(`<td>|</td>
+      <td bgcolor="green" >step1</td>
+      <td>|</td>
+      <td bgcolor="green">step2</td>
+      <td>|</td>
+      <td bgcolor="blue">step3</td>
+      <td>|</td>
+      <td bgcolor="red">Review</td><td>|</td>`);
+   var formPage1=$(`<br>Please select a meal
+            <label ><select id="meal" >
+              <option value="${meal}">${meal}
+              </option>
+              <option value="breakfast">Breakfast
+              </option>
+              <option value="lunch">Lunch
+              </option>
+              <option value="dinner">Dinner</option>
+             </select> 
+            </label>
+            <br>
+            <br>
+            <label>Number of Person</label>
+            <label>
+             <input type="number" id="number"  min="1" max="10" value="${number}">
+             </input>
+            </label>
+                    <br><br>
+             <label>
+              <button id="page1nextBtn" >Next</button> 
+             </label>
+          </input>
+          <BR>
+         `);
+  
+
+   var formPage2=$(`
+      <p></p>
+          <br>
+            Please select a Restaurant
+          <label >
+             <select id="restaurant" >
+             <option value="${restaurant}">${restaurant}  </option>
+              <option value="Olive-Garden">Olive Garden
+              </option>
+              <option value="Panda-Express">Panda Express
+              </option>
+              <option value="Pizzeria">Pizzeria</option>
+              <option value="Vege-Deli">Vege Deli</option>
+              <option value="Taco-Bell">Taco Bell</option>
+             </select> 
+           </label><br><br>
+            <button id="page2prvBtn">
+            Previous</button>
+            <button id="page2nextBtn">
+            Next</button><br><br>`);
+
+   
+   var formPage3=$(`
+      <p></p>
+          <br>
+         
+            Please select a Dish<br>
+            
+            <label id="${i}">
+               <select id="dish${i}" >
+                <option value="${dish[i]}">${dish[i]} 
+                </option>
+                <option value="Chicken-Burger">Chicken-Burger
+                </option>
+                <option value="Hum-Burger">Hum-Burger
+                </option>
+                <option value="Cheese-Burger">Cheese-Burger
+                </option>
+                <option value="Fries">Fries
+                </option>
+                <option value="Burrito">Burrito
+                </option>
+                <option value="Steak">Steak
+                </option>
+                <option value="Coleslaw-Sandwich" >Coleslaw-Sandwich
+                </option>
+                <option  id="Veg${i}" value="Veg-Salad">Veg-Salad
+                </option>
+               </select> 
+               <input type="number" id="quantity${i}" min="1" max="10" value="${quantity[i]}">
+               </input>
+            </label><br><br>
+            <button id="addMeal">
+            Add Meal</button><br>
+            <button id="page3prvBtn">
+            Previous</button>
+            <button id="page3nextBtn">
+            Next</button><br><br>`);
+
+
+// options of menu list
+// var Chicken=$(`<option id="Chicken${j}" value="Chicken-Burger">Chicken-Burger</option>`);
+// var Hum=$(`<option id="Hum${j}" value="Hum-Burger">Hum-Burger</option>`);
+// var Cheese=$(`<option id="Cheese${j}" value="Cheese-Burger">Cheese-Burger</option>`);
+// var Fries=$(`<option id="Fries${j}" value="Fries">Fries</option>`);
+// var Burrito=$(`<option id="Burrito${j}" value="Burrito">Burrito</option>`);
+// var Steak=$(`<option id="Steak${j}" value="Steak">Steak</option>`);
+// var Coleslaw=$(`<option id="Coleslaw${j}" value="Coleslaw-Sandwich">Coleslaw-Sandwich</option>`);
+// var Veg=$(`<option id="Veg${j}" value="Veg-Salad">Veg-Salad</option>`);
+// var select=$(`<select onchange="myFunction()" id="dish${j}"></select>`);
+
+// remove item from menu list
+
+function myFunction(){
+ 
+   var j,k=dish.length-1;
+  
+      if (i==0) {
+        
+        dish[i]=$(`#dish${i}`).val();
+      quantity[i]=$(`#quantity${i}`).val();
+
+      } 
+      else {  
+        for(j=0;j<k;j++){
+
+        dish[j]=$(`#dish${j}`).val();
+      quantity[j]=$(`#quantity${j}`).val();
+
+        }
+
+      }
+  $("#form1").empty();
+    $(".container").append(step1);
+    $("#row").empty();
+    $("#row").append(rowpage3);
+       let arr =[];
+    $("#form1").append(`<p></p><br>     
+            Please select a Dish`); 
+      for (var j = 0; j < (dish.length-1); j++) {
+        console.log(dish[j])
+        $("#form1").append(`<br>          
+            <label id="${j}"><select onchange="myFunction()" id="dish${j}">
+             <option  value="${dish[j]}">${dish[j]}</option>
+            <option id="Chicken${j}" value="Chicken-Burger">Chicken-Burger</option>
+    <option id="Hum${j}" value="Hum-Burger">Hum-Burger</option>
+    <option id="Cheese${j}" value="Cheese-Burger">Cheese-Burger</option>
+    <option id="Fries${j}" value="Fries">Fries</option>
+    <option id="Burrito${j}" value="Burrito">Burrito</option>
+    <option id="Steak${j}" value="Steak">Steak</option>
+    <option id="Coleslaw${j}" value="Coleslaw-Sandwich">Coleslaw-Sandwich</option>
+    <option id="Veg${j}" value="Veg-Salad">Veg-Salad</option></select>
+            <input type="number" id="quantity${j}" min="1" max="10" value="${quantity[j]}">
+               </input>
+            </label>`)
+      
+      for (var p = 0; p < dish.length; p++) {
+        
+             
+     if (dish[p]=="Veg-Salad") {
+      console.log(dish[p])
+        $(`#Veg${j}`).remove();
+        }
+     else if (dish[p]=="Fries") {
+        $(`#Fries${j}`).remove();
+      }
+     else if (dish[p]=="Burrito") {
+        $(`#Burrito${j}`).remove();
+      }
+     else if (dish[p]=="Steak") {
+        $(`#Steak${j}`).remove();
+      }
+     else if (dish[p]=="Coleslaw-Sandwich") {
+        $(`#Coleslaw${j}`).remove();
+      }
+     else if (dish[p]=="Cheese-Burger") {
+        $(`#Cheese${j}`).remove();
+      }
+     else if (dish[p]=="Hum-Burger") {
+        $(`#Hum${j}`).remove();
+      }
+     else if (dish[p]=="Chicken-Burger") {
+        $(`#Chicken${j}`).remove();
+      }
+    }
+      
+    }   
+   
+    $("#form1").append(`<br><br>
+            <button id="addMeal">
+            Add Meal</button><br>
+            <button id="page3prvBtn">
+            Previous</button>
+            <button id="page3nextBtn">
+            Next</button><br><br>`);
+    
+}
+//var formPageReview=$();
+    
+    //// 1111111111111111
+
+   //adding first page
+  $(".container").append(step1);
+  $("#row").append(rowpage1);
+  $("#form1").append(formPage1);
+
+  //Move to page1 by privous of page2
+  $(document).on("click","#page2prvBtn",function(ep2){
+    ep2.preventDefault();
+
+          
+
+      $("#form1").empty();
+      $(".container").append(step1);
+      $("#row").empty();
+      $("#row").append(rowpage1);     
+      $("#form1").append(formPage1);
+    
+  });
+
+
+      ///2222222222222
+  //Move to page2
+  $(document).on("click","#page1nextBtn",function(e1){
+    e1.preventDefault();
+    $("p").empty();
+     meal=$("#meal").val();
+     number=$("#number").val();
+    
+    if (meal=="----") {
+            $('#meal').after('<p id="error">This field is required</p>');
+            
+        }
+    else{   
+            if(number>10||number<1){
+                $('#number').after('<p id="error">Value must be in range 1-10</p>');  
+            }
+            else{
+            
+                $("#form1").empty();
+                $(".container").append(step1);
+                $("#row").empty();
+                $("#row").append(rowpage2);     
+                $("#form1").append(formPage2);
+                }
+        }
+  });
+
+  //Move to page2 by privous of Page3
+  $(document).on("click","#page3prvBtn",function(ep3){
+    ep3.preventDefault();
+    dish.splice(0,i);;
+    quantity.splice(0,i);
+    i=0;
+    dish=["----"];
+    $("#form1").empty();
+    $(".container").append(step1);
+    $("#row").empty();
+    $("#row").append(rowpage2);     
+    $("#form1").append(formPage2);
+
+  });
+
+
+
+          //33333333333
+  //Move to page3
+  $(document).on("click","#page2nextBtn",function(e2){
+    e2.preventDefault();
+    $("p").empty();
+    restaurant=$("#restaurant").val();
+        
+    if (restaurant=="----") {
+            $('#restaurant').after('<p class="error">This field is required</p>');
+            
+        }
+
+        else{
+
+    $("#form1").empty();
+    $(".container").append(step1);
+    $("#row").empty();
+    $("#row").append(rowpage3);     
+    $("#form1").append(formPage3);
+  }
+
+  });
+ 
+  //Move to page3 by privous of review
+  $(document).on("click","#pageLastprvBtn",function(epr){
+    epr.preventDefault();
+    
+    $("#form1").empty();
+    $(".container").append(step1);
+    $("#row").empty();
+    $("#row").append(rowpage3);
+       let arr =[];
+    $("#form1").append(`<p></p><br>     
+            Please select a Dish`); 
+      for (var j = 0; j < (dish.length-1); j++) {
+        console.log(dish[j])
+        $("#form1").append(`<br>          
+            <label id="${j}">
+              <select onchange="myFunction()" id="dish${j}">
+                <option value="${dish[j]}">${dish[j]} </option>
+                <option id="Chicken${j}" value="Chicken-Burger">Chicken-Burger</option>
+              <option id="Hum${j}" value="Hum-Burger">Hum-Burger</option>
+              <option id="Cheese${j}" value="Cheese-Burger">Cheese-Burger</option>
+              <option id="Fries${j}" value="Fries">Fries</option>
+              <option id="Burrito${j}" value="Burrito">Burrito</option>
+              <option id="Steak${j}" value="Steak">Steak</option>
+              <option id="Coleslaw${j}" value="Coleslaw-Sandwich">Coleslaw-Sandwich</option>
+              <option id="Veg${j}" value="Veg-Salad">Veg-Salad</option>
+                
+               </select> 
+               <input type="number" id="quantity${j}" min="1" max="10" value="${quantity[j]}">
+               </input>
+            </label>`)
+
+      
+      
+      for (var p = 0; p < dish.length; p++) {
+        
+                
+     if (dish[p]=="Veg-Salad") {
+      console.log(dish[p])
+        $(`#Veg${j}`).remove();
+        }
+     else if (dish[p]=="Fries") {
+        $(`#Fries${j}`).remove();
+      }
+     else if (dish[p]=="Burrito") {
+        $(`#Burrito${j}`).remove();
+      }
+     else if (dish[p]=="Steak") {
+        $(`#Steak${j}`).remove();
+      }
+     else if (dish[p]=="Coleslaw-Sandwich") {
+        $(`#Coleslaw${j}`).remove();
+      }
+     else if (dish[p]=="Cheese-Burger") {
+        $(`#Cheese${j}`).remove();
+      }
+     else if (dish[p]=="Hum-Burger") {
+        $(`#Hum${j}`).remove();
+      }
+     else if (dish[p]=="Chicken-Burger") {
+        $(`#Chicken${j}`).remove();
+      }
+    }
+      
+    }   
+   
+    $("#form1").append(`<br><br>
+            <button id="addMeal">
+            Add Meal</button><br>
+            <button id="page3prvBtn">
+            Previous</button>
+            <button id="page3nextBtn">
+            Next</button><br><br>`);
+    
+
+  });
+
+  /// adding new meal
+
+$(document).on("click","#addMeal",function(addm){
+  addm.preventDefault();
+
+  $("p").empty();
+  ++i
+  dish[i-1]=$(`#dish${i-1}`).val();
+  quantity[i-1]=$(`#quantity${i-1}`).val();
+
+
+  dish[i+1]="----";
+  quantity[i+1]=1;
+
+    if (dish[i-1]=="----") {
+            $(`#quantity${i-1}`).after('<p id="error">This field is required</p>');
+            i--;
+            
+    }
+    else{
+            if(quantity[i-1]>15||quantity[i-1]<1){
+                $(`#quantity${i-1}`).after('<p id="error">Value must be in range 1-15</p>'); 
+                i--; 
+            }
+
+
+            else{
+                dish[i-1]=$(`#dish${i-1}`).val();
+                 quantity[i-1]=$(`#quantity${i-1}`).val();
+              $(`#${i-1}`).after(`<br><label id="${i}" >
+              <select onchange="myFunction()" id="dish${i}" >
+              <option value="${dish[i+1]}">${dish[i+1]}</option>
+              <option id="Chicken${i}" value="Chicken-Burger">Chicken-Burger</option>
+              <option id="Hum${i}" value="Hum-Burger">Hum-Burger</option>
+              <option id="Cheese${i}" value="Cheese-Burger">Cheese-Burger</option>
+              <option id="Fries${i}" value="Fries">Fries</option>
+              <option id="Burrito${i}" value="Burrito">Burrito</option>
+              <option id="Steak${i}" value="Steak">Steak</option>
+              <option id="Coleslaw${i}" value="Coleslaw-Sandwich">Coleslaw-Sandwich</option>
+              <option id="Veg${i}" value="Veg-Salad">Veg-Salad</option>
+              </select> 
+              <input type="number" id="quantity${i}" min="1" max="50" value="1">
+              </input>
+              </label>`);
+    
+            }
+          
+        }
+
+
+
+
+
+
+
+
+  
+
+      for (var p = 0; p < i; p++) {
+        
+
+     if (dish[p]=="Veg-Salad") {
+        $(`#Veg${i}`).remove();
+        }
+     else if (dish[p]=="Fries") {
+        $(`#Fries${i}`).remove();
+      }
+     else if (dish[p]=="Burrito") {
+        $(`#Burrito${i}`).remove();
+      }
+     else if (dish[p]=="Steak") {
+        $(`#Steak${i}`).remove();
+      }
+     else if (dish[p]=="Coleslaw-Sandwich") {
+        $(`#Coleslaw${i}`).remove();
+      }
+     else if (dish[p]=="Cheese-Burger") {
+        $(`#Cheese${i}`).remove();
+      }
+     else if (dish[p]=="Hum-Burger") {
+        $(`#Hum${i}`).remove();
+      }
+     else if (dish[p]=="Chicken-Burger") {
+        $(`#Chicken${i}`).remove();
+      }
+    }
+      
+  });
+
+//Move to pageReview
+  $(document).on("click","#page3nextBtn",function(e3){
+
+    e3.preventDefault();
+
+    $("p").empty();
+    var j,k=dish.length-1;
+      if (i==0) {
+        
+        dish[i]=$(`#dish${i}`).val();
+      quantity[i]=$(`#quantity${i}`).val();
+
+      } 
+
+      else { 
+        for(j=0;j<k;j++){
+
+        dish[j]=$(`#dish${j}`).val();
+      quantity[j]=$(`#quantity${j}`).val();
+
+        }
+
+      }
+   
+    
+    if (dish[i]=="----") {
+            $(`#quantity${i}`).after('<p id="error">This field is required</p>');
+            
+        }
+    
+    else{
+            if(quantity[i]>15||quantity[i]<1){
+                $(`#quantity${i}`).after('<p id="error">Value must be in range 1-15</p>'); 
+                 
+            }
+            else{
+
+        $("#form1").empty();
+        $(".container").append(step1);
+        $("#row").empty();
+        $("#row").append(`<td>|</td>
+          <td bgcolor="green" >step1</td>
+          <td>|</td>
+          <td bgcolor="green">step2</td>
+          <td>|</td>
+          <td bgcolor="green">step3</td>
+          <td>|</td>
+          <td bgcolor="blue">Review</td><td>|</td>`);     
+        $("#form1").append(`<table>
+          <tr>
+            <td>Meal</td>
+            <td>${meal}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>No. of People</td>
+            <td>${number}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Restourant</td>
+            <td>${restaurant}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Dishes</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <table id="orderItem">
+                
+                
+              </table>
+            </td>
+          </tr>
+         </table>
+         </label><br><br>
+                  <button id="pageLastprvBtn">
+                  Previous</button>
+                  <button id="order">
+                  Place order</button><br><br>`);
+        
+        if (i==0) {
+          for(j=0;j<=k;j++){
+
+            $("#orderItem").append(`<tr>
+                  <td>${dish[j]}</td>
+                  <td></td><td></td>
+                  <td>${quantity[j]}</td>   
+                </tr>`)
+
+          }
+        } else { 
+          for(j=0;j<k;j++){
+
+            $("#orderItem").append(`<tr>
+                  <td>${dish[j]}</td>
+                  <td></td><td></td>
+                  <td>${quantity[j]}</td>   
+                </tr>`)
+
+          }
+
+        }
+         
+      }
+    }
+  });
+
+
+  /// Place order
+
+  $(document).on("click","#order",function(epo){
+    epo.preventDefault();
+    $("#form1").empty();
+    $(".container").append(step1);
+    $("#row").empty();
+    $("#row").append(`<td>|</td>
+      <td bgcolor="green" >step1</td>
+      <td>|</td>
+      <td bgcolor="green">step2</td>
+      <td>|</td>
+      <td bgcolor="green">step3</td>
+      <td>|</td>
+      <td bgcolor="green">Review</td><td>|</td>`);    
+    $("#form1").append(`<h2 style="text-align: center; color: blue">Order is Placed!!!</h2>`);
+
+  });
+
+
+
+
+
+
+</script>
+
+
